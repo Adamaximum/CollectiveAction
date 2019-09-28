@@ -87,11 +87,32 @@ public class BeamControl : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ball")
         {
-
+            if (gameObject.name == "VertBeam")
+            {
+                if (vertAttract == true && reversePolarity == false)
+                {
+                    collision.gameObject.transform.position += new Vector3(0.05f, 0f, 0f);
+                }
+                if (vertAttract == true && reversePolarity == true)
+                {
+                    collision.gameObject.transform.position -= new Vector3(0.05f, 0f, 0f);
+                }
+            }
+            if (gameObject.name == "HorizBeam")
+            {
+                if (horizAttract == true && reversePolarity == false)
+                {
+                    collision.gameObject.transform.position += new Vector3(0f, 0.05f, 0f);
+                }
+                if (horizAttract == true && reversePolarity == true)
+                {
+                    collision.gameObject.transform.position -= new Vector3(0, 0.05f, 0f);
+                }
+            }
         }
     }
 }
