@@ -42,7 +42,30 @@ public class BeamControl : MonoBehaviour
             }
         }
 
-        if(reversePolarity == false)
+        if (Input.GetKey(KeyCode.C))
+        {
+            if(gameObject.name == "VertBeam" && transform.localScale.y > 0.1)
+            {
+                transform.localScale -= new Vector3(0f, 0.01f, 0f);
+            }
+            if (gameObject.name == "HorizBeam" && transform.localScale.x > 0.1)
+            {
+                transform.localScale -= new Vector3(0.01f, 0f, 0f);
+            }
+        }
+        if (Input.GetKey(KeyCode.V))
+        {
+            if (gameObject.name == "VertBeam" && transform.localScale.y < 0.8)
+            {
+                transform.localScale += new Vector3(0f, 0.01f, 0f);
+            }
+            if (gameObject.name == "HorizBeam" && transform.localScale.x < 0.8)
+            {
+                transform.localScale += new Vector3(0.01f, 0f, 0f);
+            }
+        }
+
+        if (reversePolarity == false)
         {
             beamSR.color = normal;
         }
@@ -64,8 +87,8 @@ public class BeamControl : MonoBehaviour
             else
             {
                 vertAttract = false;
-                normal.a = 0f;
-                reverse.a = 0f;
+                normal.a = 0.2f;
+                reverse.a = 0.2f;
             }
         }
         if (gameObject.name == "HorizBeam")
@@ -81,8 +104,8 @@ public class BeamControl : MonoBehaviour
             else
             {
                 horizAttract = false;
-                normal.a = 0f;
-                reverse.a = 0f;
+                normal.a = 0.2f;
+                reverse.a = 0.2f;
             }
         }
     }
@@ -97,7 +120,7 @@ public class BeamControl : MonoBehaviour
                 {
                     collision.gameObject.transform.position += new Vector3(0.05f, 0f, 0f);
                 }
-                if (vertAttract == true && reversePolarity == true)
+                else if (vertAttract == true && reversePolarity == true)
                 {
                     collision.gameObject.transform.position -= new Vector3(0.05f, 0f, 0f);
                 }
@@ -108,7 +131,7 @@ public class BeamControl : MonoBehaviour
                 {
                     collision.gameObject.transform.position += new Vector3(0f, 0.05f, 0f);
                 }
-                if (horizAttract == true && reversePolarity == true)
+                else if (horizAttract == true && reversePolarity == true)
                 {
                     collision.gameObject.transform.position -= new Vector3(0, 0.05f, 0f);
                 }
