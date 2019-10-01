@@ -1,12 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BeamControl : MonoBehaviour
 {
     public SpriteRenderer beamSR;
     public Transform vertTR;
     public Transform horizTR;
+
+    public TextMeshProUGUI arrows;
+    string posVert = ">>>>>>>>>>>>>>>>>";
+    string negVert = "<<<<<<<<<<<<<<<<<";
+    string posHoriz = ">>>>>>>>>";
+    string negHoriz = "<<<<<<<<<";
 
     public bool reversePolarity;
 
@@ -23,6 +30,8 @@ public class BeamControl : MonoBehaviour
         beamSR = GetComponent<SpriteRenderer>();
         vertTR = GameObject.Find("Magnet Right").GetComponent<Transform>();
         horizTR = GameObject.Find("Magnet Up").GetComponent<Transform>();
+
+        arrows = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -83,12 +92,23 @@ public class BeamControl : MonoBehaviour
                 vertAttract = true;
                 normal.a = 1f;
                 reverse.a = 1f;
+
+                if (reversePolarity == false)
+                {
+                    arrows.text = posVert;
+                }
+                else
+                {
+                    arrows.text = negVert;
+                }
             }
             else
             {
                 vertAttract = false;
                 normal.a = 0.2f;
                 reverse.a = 0.2f;
+
+                arrows.text = "";
             }
         }
         if (gameObject.name == "HorizBeam")
@@ -100,12 +120,23 @@ public class BeamControl : MonoBehaviour
                 horizAttract = true;
                 normal.a = 1f;
                 reverse.a = 1f;
+
+                if (reversePolarity == false)
+                {
+                    arrows.text = posHoriz;
+                }
+                else
+                {
+                    arrows.text = negHoriz;
+                }
             }
             else
             {
                 horizAttract = false;
                 normal.a = 0.2f;
                 reverse.a = 0.2f;
+
+                arrows.text = "";
             }
         }
     }
