@@ -6,6 +6,9 @@ using TMPro;
 
 public class GoalControl : MonoBehaviour
 {
+    Scene current;
+    string sceneName;
+
     public TextMeshProUGUI numberNeedChange;
 
     public int numberNeed;
@@ -14,6 +17,9 @@ public class GoalControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        current = SceneManager.GetActiveScene();
+        sceneName = current.name;
+
         numberNeedChange = GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -22,9 +28,28 @@ public class GoalControl : MonoBehaviour
     {
         numberNeedChange.text = (numberNeed - numberHave).ToString();
 
-        if (numberNeed == numberHave)
+        if (sceneName == "SampleScene")
         {
-            SceneManager.LoadScene("level1");
+            if (numberNeed == numberHave)
+            {
+                SceneManager.LoadScene("level1");
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
+        }
+
+        else
+        {
+            if (numberNeed == numberHave)
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("level1");
+            }
         }
     }
 
