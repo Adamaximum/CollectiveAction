@@ -23,9 +23,16 @@ public class ObstacleControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        numberNeedChange.text = (numberNeed - numberHave).ToString();
+        if (numberNeed - numberHave >= 0)
+        {
+            numberNeedChange.text = (numberNeed - numberHave).ToString();
+        }
+        else
+        {
+            numberNeedChange.text = "0";
+        }
 
-        if (numberHave == numberNeed)
+        if (numberHave >= numberNeed)
         {
             obsRB.bodyType = RigidbodyType2D.Dynamic;
         }
